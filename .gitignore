@@ -1,0 +1,14 @@
+#dashboard
+
+/dashboard/__pycache__/
+/dashboard/migrations/
+
+#ems
+/ems/__pycache__/
+
+#static
+/static/admin/
+
+#misc
+hello.py
+db.sqlite3

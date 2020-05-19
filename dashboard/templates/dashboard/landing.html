@@ -1,0 +1,43 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+
+{% block content %}
+<body>
+<!-- Loader -->
+<div class="loader startup show">
+	<span class="circles"></span>
+	<span class="circles"></span>
+	<span class="circles"></span>
+</div>
+
+<header>
+	<div class="row">
+		<h2>Employee Dashboard </h2>
+	</div>
+</header>
+
+<section class="main-content other landing py-5">
+	<div class="container">
+		<div class="graphic" style="background: url({% static 'dashboard/img/graphic.png' %}) no-repeat center,center;background-size: cover;"></div>
+		<h1>Welcome</h1>
+		<h5>Explore the dashboard!</h5>
+		<!-- <a href="/dashboard/1/">Go to the dashboard</a> -->
+		<div class="row pt-3">
+			<div class="col-6 d-flex flex-column justify-content-between align-items-center px-5">
+				<p class="text-center">I want to explore and do nothing else!</p>
+				<form action="/dashboard/1/" method='POST'>
+					{% csrf_token %}
+					<button name="type" value="basic"><i class="far fa-square"></i>Basic</button>
+				</form>
+			</div>
+			<div class="col-6 d-flex flex-column justify-content-between align-items-center px-5">
+				<p class="text-center">I want to do everything that is possible! <span class="uc bold">(Recommended)</span></p>
+				<form action="/dashboard/1/" method='POST'>
+					{% csrf_token %}
+					<button name="type" value="special"><i class="far fa-star"></i>Special</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}

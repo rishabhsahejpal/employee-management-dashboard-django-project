@@ -1,0 +1,418 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<body class='index'>
+<!-- Loader -->
+<div class="loader startup show">
+	<span class="circles"></span>
+	<span class="circles"></span>
+	<span class="circles"></span>
+</div>
+<!-- Navigation Slider -->
+<section class="navigation hidden">
+	<div class="overlay"></div>
+	<a href="/" class="switchmode uc bold"><i class="fas fa-random"></i>Switch Browsing Mode</a>
+	<div class="main">
+		<span class="menu"><i class="fas fa-align-justify"></i></span>
+		<span class="close close-nav">
+			<span class="top"></span>
+			<span class="bottom"></span>
+		</span>
+		<ul>
+			<li><a href="/dashboard/1/" class="active">Home</a></li>
+			<li><a href="/dashboard/documentation/">Documentation</a></li>
+			<li><a href="/dashboard/resources/">Resources</a></li>
+		</ul>
+		<p>Rishabh Sahejpal's designs. &copy;</p>
+
+	</div>
+</section>
+
+<header>
+	<div class="row">
+		<div class="col-menu"><i class="fas fa-align-justify"></i></div>
+		{% for employee in data.employees_all %}
+		<div class="col-header">
+			<a href="/dashboard/{{employee.team_id}}"
+			{% if data.employee.team_id == employee.team_id %}
+				class="active"
+			{% endif %}
+			>{{employee.first_name}} {{employee.last_name}}</a>
+		</div>
+		{% endfor %}
+	</div>
+</header>
+<!-- Modal Box -->
+<div class="modal-box hidden"><div class="overlay"></div><div class="modal-content d-flex justify-content-center align-items-center"></div>
+</div>
+
+<section class="main-content">
+	<div class="row">
+		<!-- Left Section -->
+		<section class="col-3 d-flex flex-column px-5 sidebar">
+			<div class="employee-info info-wrapper mb-4">
+				<div class="top d-flex flex-column">
+					<div class="img mb-3"><i class="fas fa-user"></i></div>
+					<div class="employee-personal-info d-flex align-items-start flex-column">
+						<h4 class='bold'>{{data.employee.first_name}} {{data.employee.last_name}}</h4>
+						<p><i class="fas fa-envelope"></i>{{data.info.email}}</p>
+					</div>
+				</div>
+				<div class="bottom pt-4">
+					<div class="info-container d-flex justify-content-between row">
+						<p class="col-6"><i class="fas fa-user"></i>Team Id</p>
+						<span class='col-6'>00{{data.employee.team_id}}</span>
+					</div>
+					<div class="info-container d-flex justify-content-between row">
+						<p class="col-6"><i class="fas fa-sign-in-alt"></i>Joined on</p>
+						<span class='col-6'>{{data.info.joined_on}}</span>
+					</div>
+					<div class="info-container d-flex justify-content-between row">
+						<p class="col-6"><i class="fas fa-tag"></i>Designation</p>
+						<span class='col-6'>{{data.info.designation}}</span>
+					</div>
+					<div class="info-container d-flex justify-content-between row">
+						<p class="col-6"><i class="fas fa-tasks"></i>Reports to</p>
+						<span class='col-6'>
+						{% if data.info.manager.employee.team_id == data.employee.team_id %}
+							N/A
+						{% else %}
+							{{data.info.manager.employee.first_name}} {{data.info.manager.employee.last_name}}
+						{% endif %}
+						</span>
+					</div>
+					<div class="info-container d-flex justify-content-between row">
+						<p class="col-6 mb-0"><i class="fas fa-phone"></i>Contact</p>
+						<span class='col-6 mb-0'>{{data.info.contact}}</span>
+					</div>
+				</div>
+			</div>
+		</section>	
+
+
+		<!-- Right Section -->
+		<section class="col-9 px-5 right-side pb-5">
+			<div class="row">
+				<div class="info-wrapper col-7 pl-0 pr-5 employee-performance-section">
+					<div class="heading d-flex justify-content-between mb-3">
+						<h3 class="uc bold">Your performance</h3>
+						<ul class="d-flex">
+							<li><a href="#" class="switch-period monthly op active">Monthly</a></li>
+							<li><a href="#" class="switch-period yearly op">Yearly</a></li>
+						</ul>
+					</div>
+					<!-- Monthly -->
+					<div class="row monthly op">
+						<div class="col-7">
+							<h2><i class="fas fa-star-half-alt"></i> Overall Score</h2>
+							<h4 class='uc clickop score active'><i class="fas fa-caret-right"></i>Overall Score</h4>
+							<h4 class='uc clickop efficiency'><i class="fas fa-caret-right"></i>Efficiency</h4>
+						</div>
+						<div class="col-5 position-relative graph-wrap load px-0">
+							<div class="graph score d-flex justify-content-center align-items-center">
+								<p>0%</p>
+								<svg viewBox="0 0 36 36">
+								  <path
+								    d="M18 2.0845
+								      a 15.9155 15.9155 0 0 1 0 31.831
+								      a 15.9155 15.9155 0 0 1 0 -31.831"
+								    fill="none"
+								    stroke="#444";
+								    stroke-width="1";
+								    stroke-dasharray="0, 100"
+								    data-stroke = "{{data.kpi.overall_performance}}"
+								  />
+								</svg>
+							</div>
+							<div class="graph hide  efficiency d-flex justify-content-center align-items-center">
+								<p>{{data.kpi.efficiency}}%</p>
+								<svg viewBox="0 0 36 36">
+								  <path
+								    d="M18 2.0845
+								      a 15.9155 15.9155 0 0 1 0 31.831
+								      a 15.9155 15.9155 0 0 1 0 -31.831"
+								    fill="none"
+								    stroke="#444";
+								    stroke-width="1";
+								    stroke-dasharray="{{data.kpi.efficiency}}, 100"
+								  />
+								</svg>
+							</div>
+						
+						</div>
+
+					</div>
+					<!-- Yearly -->
+					<div class="row  d-none hide yearly op">
+						<div class="col-7">
+							<h2><i class="fas fa-star-half-alt"></i> Overall Score</h2>
+							<h4 class='uc clickop score active'><i class="fas fa-caret-right"></i>Overall Score</h4>
+							<h4 class='uc clickop efficiency'><i class="fas fa-caret-right"></i>Efficiency</h4>
+						</div>
+
+						<div class="col-5 position-relative graph-wrap px-0">
+							<div class="graph score d-flex justify-content-center align-items-center">
+								<p>{{data.kpi.overall_performance_yearly}}%</p>
+								<svg viewBox="0 0 36 36">
+								  <path
+								    d="M18 2.0845
+								      a 15.9155 15.9155 0 0 1 0 31.831
+								      a 15.9155 15.9155 0 0 1 0 -31.831"
+								    fill="none"
+								    stroke="#444";
+								    stroke-width="1";
+								    stroke-dasharray="{{data.kpi.overall_performance_yearly}}, 100"
+								  />
+								</svg>
+							</div>
+							<div class="graph hide  efficiency d-flex justify-content-center align-items-center">
+								<p>{{data.kpi.efficiency_yearly}}%</p>
+								<svg viewBox="0 0 36 36">
+								  <path
+								    d="M18 2.0845
+								      a 15.9155 15.9155 0 0 1 0 31.831
+								      a 15.9155 15.9155 0 0 1 0 -31.831"
+								    fill="none"
+								    stroke="#444";
+								    stroke-width="1";
+								    stroke-dasharray="{{data.kpi.efficiency_yearly}}, 100"
+								  />
+								</svg>
+							</div>
+						
+						</div>
+					</div>
+
+				</div>
+
+				<!-- /*Stats*/ -->
+				<div class="col-5 stats-section pl-0">
+					<div class="info-wrapper">
+						<div class="heading d-flex justify-content-between mb-3">
+							<h3 class="uc bold">My Stats</h3>
+							<ul class="d-flex">
+								<li><a href="#" class="switch-period monthly stats active">Monthly</a></li>
+								<li><a href="#" class="switch-period yearly stats">Yearly</a></li>
+							</ul>
+						</div>
+						<!-- Monthly -->
+						<ul class="stats mb-0 monthly">
+							<li class="d-flex justify-content-between">
+								<p><i class="fas fa-align-justify"></i>Total Work Days</p>
+								<span class="emphasize">{{data.stat.total_work_days}}</span>
+							</li>
+							<li class="d-flex justify-content-between">
+								<p><i class="fas fa-medkit"></i>Sick Leaves</p><div><span>{{data.stat.paid_leaves}} /</span>
+								<span class="emphasize"> 15</span></div>
+							</li>
+							<li class="d-flex justify-content-between">
+								<p><i class="fas fa-money-bill"></i>Paid Leaves</p><div><span>{{data.stat.sick_leaves}} /</span>
+								<span class="emphasize"> 14</span></div>
+							</li>
+							<li class="d-flex justify-content-between">
+								<p class='mb-0'><i class="far fa-circle"></i>Unpaid Leaves</p>
+								<span class="emphasize mb-0">{{data.stat.unpaid_leaves}}</span>
+							</li>
+						</ul>
+						<!-- Yearly -->
+						<ul class="stats d-none hide mb-0 yearly">
+							<li class="d-flex justify-content-between">
+								<p><i class="fas fa-align-justify"></i>Total Work Days</p>
+								<span class="emphasize">{{data.stat.total_work_days_yearly}}</span>
+							</li>
+							<li class="d-flex justify-content-between">
+								<p><i class="fas fa-medkit"></i>Sick Leaves</p><div><span>{{data.stat.paid_leaves_yearly}} /</span>
+								<span class="emphasize"> 15</span></div>
+							</li>
+							<li class="d-flex justify-content-between">
+								<p><i class="fas fa-money-bill"></i>Paid Leaves</p><div><span>{{data.stat.sick_leaves_yearly}} /</span>
+								<span class="emphasize"> 14</span></div>
+							</li>
+							<li class="d-flex justify-content-between">
+								<p class='mb-0'><i class="far fa-circle"></i>Unpaid Leaves</p>
+								<span class="emphasize mb-0">{{data.stat.unpaid_leaves_yearly}}</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div class="row d-flex justify-content-between">
+				<div class="col-12 kpi-section">
+					<div class="info-wrapper">
+						<div class="heading d-flex justify-content-between mb-3">
+							<h3 class="uc bold">KPIs</h3>
+							<ul class="d-flex">
+								<li><a href="#" class="switch-period monthly kpis active">Monthly</a></li>
+								<li><a href="#" class='switch-period yearly kpis'>Yearly</a></li>
+							</ul>
+						</div>
+						<div class="kpi-container">
+							<!-- Monthly -->
+							<ul class='kpis mb-0 row monthly'>
+								<li class="col-4 row position-relative pl-0" id="kp1">
+									<div class="kpi-wrap col-12 align-items-center d-flex justify-content">
+										<p class="col-6"><i class="fas fa-ruler-combined"></i>KPI 1</p>
+										<div class="kpi-meter col-6">
+											<span class="bar load"
+												  style="width: 0%"></span>
+											<span class="circle load"
+												  style="left: 0"></span>
+											<span class="value load"
+												  style="left: 0"
+												  data-width="{{data.kpi.kpi_1}}">
+												  0%
+											</span>
+										</div>
+									</div>
+								</li>
+								<li class="col-4 row position-relative" id="kp2">
+									<div class="kpi-wrap col-12 align-items-center d-flex justify-content">
+										<p class="col-6"><i class="fas fa-ruler-combined"></i>KPI 2</p>
+										<div class="kpi-meter col-6">
+											<span class="bar load"
+												  style="width: 0%"></span>
+											<span class="circle load"
+												  style="left: 0"></span>
+											<span class="value load"
+												  style="left: 0"
+												  data-width="{{data.kpi.kpi_2}}">
+												  0%
+											</span>
+										</div>
+									</div>
+								</li>
+								<li class="col-4 row position-relative pr-0" id="kp3">
+									<div class="kpi-wrap col-12 align-items-center d-flex justify-content">
+										<p class="col-6"><i class="fas fa-ruler-combined"></i>KPI 3</p>
+										<div class="kpi-meter col-6">
+											<span class="bar load"
+												  style='width: 0'></span>
+											<span class="circle load" 
+												  style='left: 0'></span>
+											<span class="value load"
+												  style='left: 0'
+												  data-width="{{data.kpi.kpi_3}}">
+												  0%
+											</span>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<!-- Yearly -->
+							<ul class='kpis mb-0 d-none hide row yearly'>
+								<li class="col-4 row position-relative pl-0" id="kp1">
+									<div class="kpi-wrap col-12 align-items-center d-flex justify-content">
+										<p class="col-6"><i class="fas fa-ruler-combined"></i>KPI 1</p>
+										<div class="kpi-meter col-6">
+											<span class="bar"
+												  style="width: {{data.kpi.kpi_1_yearly}}%"></span>
+											<span class="circle"
+												  style="left: calc({{data.kpi.kpi_1_yearly}}% - 6px)"></span>
+											<span class="value"
+												  style="left: calc({{data.kpi.kpi_1_yearly}}% - 0.6rem)">
+												  {{data.kpi.kpi_1_yearly}}%
+											</span>
+										</div>
+									</div>
+								</li>
+								<li class="col-4 row position-relative" id="kp2">
+									<div class="kpi-wrap col-12 align-items-center d-flex justify-content">
+										<p class="col-6"><i class="fas fa-ruler-combined"></i>KPI 2</p>
+										<div class="kpi-meter col-6">
+											<span class="bar"
+												  style="width: {{data.kpi.kpi_2_yearly}}%"></span>
+											<span class="circle"
+												  style="left: calc({{data.kpi.kpi_2_yearly}}% - 6px)"></span>
+											<span class="value"
+												  style="left: calc({{data.kpi.kpi_2_yearly}}% - 0.6rem)">
+												  {{data.kpi.kpi_2_yearly}}%
+											</span>
+										</div>
+									</div>
+								</li>
+								<li class="col-4 row position-relative pr-0" id="kp3">
+									<div class="kpi-wrap col-12 align-items-center d-flex justify-content">
+										<p class="col-6"><i class="fas fa-ruler-combined"></i>KPI 3</p>
+										<div class="kpi-meter col-6">
+											<span class="bar"
+												  style='width: {{data.kpi.kpi_3_yearly}}%'></span>
+											<span class="circle" 
+												  style='left: calc({{data.kpi.kpi_3_yearly}}% - 6px)'></span>
+											<span class="value"
+												  style='left: calc({{data.kpi.kpi_3_yearly}}% - 0.6rem)'>
+												  {{data.kpi.kpi_3_yearly}}%
+											</span>
+										</div>
+									</div>
+								</li>
+							</ul>
+
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="row pt-2">
+				<div class="col-8 project-section pl-0 pr-4">
+					<div class="info-wrapper">	
+						<!-- Project Loading Page -->
+						<div class="projects-loading"></div>
+						<h2 class="uc bold mb-4 justify-content-between">Project
+							{% if data.privelege == True %}
+							<span class="add-project" data-id={{data.employee.team_id}}>add<i class="fas fa-plus-square"></i></span>
+							{% endif %}
+						</h2>
+						<ul class='mb-0 projects'>
+							<!-- All Projects -->
+							{% for project in data.projects %}
+								<li class='d-flex'>
+									<h3 class="justify-content-between flex-column align-items-start">
+										<a href="#"><i class="fas fa-project-diagram"></i>{{project.project_name}}</a>
+										<span><i class="fas fa-edit"></i>Assigned On: {{project.assigned_on}}</span>
+									</h3>
+									{% if data.privelege == True %}
+
+									<ul class="options">
+										<li class="mr-3 edit-project" 
+											data-employee='{{data.employee.team_id}}' 
+											data-id="{{project.id}}"><i class="fas fa-pencil-alt"></i>Edit</li>
+										<li class="delete-project" 
+											data-employee='{{data.employee.team_id}}' 
+											data-id="{{project.id}}"><i class="fas fa-trash"></i>Delete</li>
+									</ul>
+									<form action="#" method='POST' class='update-projects justify-content-center align-items-center d-none hide'>
+										<i class="fas fa-project-diagram"></i>
+										{% csrf_token %}
+										<input type="text" name="project" class="projects flex-grow-1" placeholder='{{project.project_name}}'/>
+										<button data-id="{{project.id}}" type="button" class="save mr-2">
+											<i class="fas fa-save"></i>
+										</button>
+										<button type="button" class="cancel">
+											<i class="fas fa-times"></i>
+										</button>
+									</form>
+									{% endif %}
+									
+								</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-4 d-flex flex-column notification-section mr-0 pr-0">
+					<h3 class='uc bold mb-0'>Notifications</h3>
+					<div class='d-flex flex-grow-1'>
+						<p class='d-none align-self-center'>No new notifications</p>
+						<ul class='notification-list mb-0'>
+							{% for notification in data.notifications %}
+							<li class="notifications">
+								<p><i class="fas fa-bell"></i>{{notification.name}}</p><!-- <a href="#">Read More</a> -->
+							</li>
+							{% endfor %}
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+</section>
+{% endblock %}

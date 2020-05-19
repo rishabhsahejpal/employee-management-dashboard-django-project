@@ -1,0 +1,72 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<body>
+<!-- Loader -->
+<div class="loader startup show">
+	<span class="circles"></span>
+	<span class="circles"></span>
+	<span class="circles"></span>
+</div>
+<!-- Navigation Slider -->
+<section class="navigation hidden">
+	<div class="overlay"></div>
+	<div class="main">
+		<span class="menu"><i class="fas fa-align-justify"></i></span>
+		<span class="close close-nav">
+			<span class="top"></span>
+			<span class="bottom"></span>
+		</span>
+		<ul>
+			<li><a href="/dashboard/1/">Home</a></li>
+			<li><a href="/dashboard/documentation/" class="active">Documentation</a></li>
+			<!-- <li><a href="#"{% if data.page == 'documentation' %} class="active"{% endif %}>Documentation</a></li> -->
+			<li><a href="/dashboard/resources/">Resources</a></li>
+		</ul>
+		<p>Rishabh Sahejpal's designs. &copy;</p>
+
+	</div>
+</section>
+
+<header>
+	<div class="row">
+		<div class="col-menu"><i class="fas fa-align-justify"></i></div>
+			<h2>Documentation</h2>
+		</div>
+	</header>
+
+<section class="main-content other documentation py-5">
+	<div class="container">
+		<h3>Employee Dashboard v1.0.0</h3>	
+		<p>This applicaiton is a recreated empolyee dashboard, with full front-end and back-end functionality using CRUD operations. The employee dashboard allows you to view the employee's information
+		beginning with the personal details to their performance stats based on time. You can also view the projects that were assigned to that specific employee. The stats are 
+		provided in monthly and yearly formats as would be provided in an actual company.</p>
+		<p>The database contains information of six dummy employees. The personal information that is displayed includes their name, email, job designation,
+		their manager if applicable, their joining date among others. The stats include their performance, their working stats, their KPIs and a list of all projects that the employee
+		is assigned to. The dashboard also displays any company notifications on the bottom-right corner of the dashboard.
+		<p>There are two modes to browse/use the dashboard. One is a <span class="uc">'Basic'</span> mode that allows user to only view the dashboard without any editing privileges. The 
+		<span class="uc">'Special'</span> mode allows user 
+		to edit,rename and delete projects	assigned to that specific employee and in a way, it mimics an actual employee dashboard to most extent.</p>
+		<p>You can view the resources used for the dashboard <a href="/dashboard/resources/">here</a>.</p>
+		<p class="note">The system uses Django framework (python-based) for back-end functionality.</p>
+		<h4>How to use the dashboard?</h4>
+		<ul>
+			<li>1. Choose an option for browsinig and navigating the dashbpard from <span class="uc">'basic'</span> or <span class="uc">'special'</span> </li>
+			<li>2. Click on the employee name on the top of page, to go to his respective dashboard</li>
+			<li>3. Browse and navigate the dashboard to view the respective employees's information</li>
+			<li>4. Click on 'monthly' and 'yearly' options to view respective monthly and yearly stats</li>
+			<li class='note'>The below options only applies to you, if you are browsing in special mode</li>
+			<li>5. Click on the 'pencil' icon right side of each project's name to edit the project title and then, press the 'disk' icon to save the changes. You can also click on 'Cross' 
+			icon to not save and go back.</li>
+			<li>6. Click on the 'garbage-can' to delete the respective project. It will lead you to dialog box asking to verify if you want to proceed deletion with a 'Yes' or 'No' as you 
+			would like. You can 
+			also click on the 'cross' on top-right corner of dialog box to close the dialog box.</li>
+			<li>7. Click on the 'Add +' button opposite to 'Projects' heading, to add a new project. Choose a project name and assign it to as many employees you would like and click 
+			'Add'. The new
+			project will be added to the list</li>
+			<p class="note">If an error occurs, during adding or deleting or removing, a message will be displayed starting with : "Error: "</p>
+		</ul>
+	</div>
+</section>
+
+{% endblock %}

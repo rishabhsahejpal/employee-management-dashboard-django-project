@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" class="preload"><!--  class="expand-transition noscroll"> -->
+<head>
+	<title>
+	{% if data.page == 'documentation' %}
+	Documentation - Employee Management System | Rishabh Sahejpal's Designs
+	{% elif data.page == 'resources' %}
+	Resources - Employee Management System | Rishabh Sahejpal's Designs
+	{% elif data.page == 'index' %}
+	(New)Employee Management System | Rishabh Sahejpal's Designs
+	{% else %}
+	Welcome to the dashboard - Employee Management System | Rishabh Sahejpal's Designs
+	{% endif %}
+	</title>
+	<!-- Meta Tags -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Refresh tag -->
+	<!-- <meta http-equiv="refresh" content="10"> -->
+	<!-- Link Tags -->
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<!-- Favicon -->
+	<link rel="icon" href="{% static 'dashboard/favicon/favicon.ico' %}" type="image/x-icon" />
+	<link rel="shortcut icon" href="{% static 'dashboard/favicon/favicon.ico' %}" type="image/x-icon" />
+	<!-- Other Links -->
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<!-- Fonts	 -->
+	<link href="https://fonts.googleapis.com/css?family=Vollkorn:900&display=swap" rel="stylesheet">
+	<!-- App css -->
+	<link rel="stylesheet" type='text/css' href="{% static 'dashboard/css/app.css' %}">
+</head>
+{% block content %}
+
+{% endblock %}
+<footer>
+	<p>Rishabh Sahejpal's Designs &copy;</p>
+</footer>
+<!-- Jquery files	 -->
+
+	<script	src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+	<script src="https://kit.fontawesome.com/e39050a269.js"></script>
+
+	<script src="{% static 'dashboard/js/app.js' %}" type="text/javascript"></script>
+
+
+</body>
+</html>
