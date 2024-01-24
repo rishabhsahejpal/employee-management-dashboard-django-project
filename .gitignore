@@ -7,7 +7,7 @@
 /ems/__pycache__/
 
 # ems-env
-/ems-env/
+ems-env/
 
 #static
 /static/admin/
