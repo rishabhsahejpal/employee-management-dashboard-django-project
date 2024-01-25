@@ -24,7 +24,7 @@ SECRET_KEY = 'random' #config('SECRET_KEY') #Set on heroku
 
 DEBUG = True#config('DEBUG', default=False, cast=bool) #Not Set on heroku, so default - false
 
-ALLOWED_HOSTS = ['ems-django-app.herokuapp.com','localhost','rishabhsahejpal.com','http://rishabhsahejpal.pythonanywhere.com'] #Add my app
+ALLOWED_HOSTS = ['ems-django-app.herokuapp.com','localhost','rishabhsahejpal.com','rishabhsahejpal.pythonanywhere.com'] #Add my app
 
 # Application definition
 
