@@ -10,6 +10,7 @@
 ems-env/
 
 #static
+/static/dashboard/
 /static/admin/
 
 #misc

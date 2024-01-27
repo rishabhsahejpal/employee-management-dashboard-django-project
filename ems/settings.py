@@ -24,7 +24,7 @@ SECRET_KEY = 'random' #config('SECRET_KEY') #Set on heroku
 
 DEBUG = True#config('DEBUG', default=False, cast=bool) #Not Set on heroku, so default - false
 
-ALLOWED_HOSTS = ['ems-django-app.herokuapp.com','localhost','rishabhsahejpal.com','rishabhsahejpal.pythonanywhere.com'] #Add my app
+ALLOWED_HOSTS = ['ems-django-app.herokuapp.com','localhost', 'rishabhsahejpal.pythonanywhere.com'] #Add my app
 
 # Application definition
 
@@ -75,7 +75,7 @@ WSGI_APPLICATION = 'ems.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'db.sqlite3',
+        'NAME': '/home/rishabhsahejpal/employee-management-dashboard-django-project/db.sqlite3', # Put link to NAME attribute for Pythonnaywhere SQLite
     }
 }
 
